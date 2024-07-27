@@ -2,56 +2,56 @@ SELECT location, date, total_cases, new_cases, population
 from covidvacinations
 where total_cases IS NOT NULL and total_cases > 50
 order by 1, 2
-limit 20
+limit 10
 
 
 
---Percentage of total Cases over total Deaths
+--Query 2: Percentage of total Cases over total Deaths
 SELECT location, date, total_cases, total_deaths, (total_cases/total_deaths)*100 as percentage
 from covidvacinations
 where total_cases IS NOT NULL and total_cases > 50
 and location Like '%Kingdom%'
 order by 1, 2
-limit 20
+limit 10
 
 
 
 
---total cases over population
+--Query 3: total cases over population
 SELECT location, total_cases, population, (total_cases/population)*100 as percentage
 from covidvacinations
 where total_cases IS NOT NULL 
 and location Like '%Kingdom%'
 order by 2 desc
-limit 20
+limit 10
 
 
 
--- looking at Countries with Highest Infection rate
+--Query 4: looking at Countries with Highest Infection rate
 SELECT location, MAX(total_cases) as MAX_DEATH
 from covidvacinations
 where total_cases IS NOT NULL 
 and continent is not NULL
 GROUP BY location
 order by MAX_DEATH desc
-limit 20
+limit 10
 
 
 
 
---LOOKING AT CONTINENT
+--Query 5: LOOKING AT CONTINENT
 SELECT CONTINENT, MAX(total_cases) as MAX_DEATH
 from covidvacinations
 where total_cases IS NOT NULL
 and continent is not NULL
 GROUP BY continent
 order by MAX_DEATH desc
-limit 20
+limit 10
 
 
 
 
---NULL CONTINENT
+--Query 6: NULL CONTINENT
 SELECT CONTINENT, MAX(total_cases) as MAX_DEATH
 from covidvacinations
 where total_cases IS NOT NULL
@@ -63,7 +63,7 @@ order by MAX_DEATH desc
 
 
 
---Total population vs Vaccination 
+--Query 7: Total population vs Vaccination using CTE
 SELECT covidV.continent, covidV.location, covidV.date, covidV.population ,covidD.new_vaccinations,
 SUM( covidD.new_vaccinations) OVER (partition by covidV.location
 order by covidV.location, covidV.date) as Total_vaccinaton
