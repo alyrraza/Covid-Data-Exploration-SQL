@@ -1,4 +1,4 @@
-<img width="458" alt="image" src="https://github.com/user-attachments/assets/e56d9b93-2e27-472c-969e-847191cd3f5f"># **COVID-19 Data Exploration Project**
+# **COVID-19 Data Exploration Project**
 
 ## **Languages and Tools Used**
 *SQL, VSCode, GitHub*
